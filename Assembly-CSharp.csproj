@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Infantry.cs" />
     <Compile Include="Assets\Scripts\Ground.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -681,9 +682,17 @@
       <Project>{599EA411-4315-97E8-14F0-B56AF4E0E7C3}</Project>
       <Name>Unity.VisualScripting.State.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{99B76175-6451-06A0-02E2-97C99DFA0AFA}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="VSSettingsProvider.csproj">
       <Project>{51C1A7FE-C7F7-0354-9A6D-3F915FA845A1}</Project>
       <Name>VSSettingsProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{A8624C22-EB92-D7D0-2757-BCD3FDC3CE59}</Project>
+      <Name>NavMeshComponents</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
       <Project>{4DBD688C-66CD-A761-C4E5-244EE2F68BD7}</Project>

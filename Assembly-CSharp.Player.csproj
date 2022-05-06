@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Infantry.cs" />
     <Compile Include="Assets\Scripts\Ground.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -616,6 +617,10 @@
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{D42C3431-D2FF-FB86-5E93-65197E52F21A}</Project>
       <Name>Unity.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{A8624C22-EB92-D7D0-2757-BCD3FDC3CE59}</Project>
+      <Name>NavMeshComponents</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
       <Project>{4DBD688C-66CD-A761-C4E5-244EE2F68BD7}</Project>
