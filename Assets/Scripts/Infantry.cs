@@ -5,19 +5,28 @@ using UnityEngine.AI;
 
 public class Infantry : MonoBehaviour
 {
+    private Camera cam;
+    private NavMeshAgent agent;
     public int playerV;
     Rigidbody rig;
     // Start is called before the first frame update
     void Start()
     {
-        rig = GetComponent<Rigidbody>();
+        cam = Camera.main;
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        rig.velocity = new Vector3(x * playerV, rig.velocity.y , z * playerV);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                agent.SetDestination(hit.point);
+            }
+
+        }
     }
 }
