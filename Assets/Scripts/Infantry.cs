@@ -1,79 +1,84 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Infantry : MonoBehaviour
 {
-    private Camera cam;
     private NavMeshAgent agent;
     public int playerV;
-    Rigidbody rig;
     float Health;
     float MaxHealth;
     public Canvas cv;
     public HealthBar hb;
     public bool team;
-    public Vector3 target;
+    private Rigidbody rig;
+    public Transform target;
     public Transform tr;
     private Collider[] nearby;
     private bool Chasing;
+    public float x, z;
+    float NextAttack = 0;
+    float FireRate = 1;
     // Start is called before the first frame update
     void Start()
     {
         MaxHealth = 100;
         Health = MaxHealth;
         cv.worldCamera = Camera.main;
-        cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
         tr = GetComponent<Transform>();
+        rig = GetComponent<Rigidbody>();
         Chasing = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        x = transform.position.x;
+        z = transform.position.z;
         if (!Chasing)
         {
-            nearby = Physics.OverlapSphere(tr.position, 10, 8, QueryTriggerInteraction.Ignore);
-            target = tr.position; //cambiar por nexo
+            float radius = 20;
+            nearby= Physics.OverlapSphere(tr.position, radius, 8);
+            nearby = nearby.Where(h => h != this.GetComponent<Collider>()).ToArray();
+            Debug.Log("nearby l: "+nearby.Length);
 
-            float closest = 11;
+            float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
-                Debug.Log("Hello World");
-
-
                 float dis = Vector3.Distance(hit.transform.position, tr.position);
-                if (dis < closest)
+                if (dis <= closest)
                 {
                     closest = dis;
-                    target = hit.transform.position;
-                    Debug.Log("chasing: " + hit.name + " with Vector3 "+ target);
+                    target = hit.transform;
+                    Debug.Log(this.name + " chasing: " + hit.name);
+                    agent.SetDestination(target.position);
                 }
-            }
                 Chasing = true;
-                agent.SetDestination(target);
-            
+                
+            }
+            if (nearby.Length==0)
+            {
+                Chasing = false;
+                agent.ResetPath();//cambiar por nexo
+                target = null;
+            }
+
         }
-        Debug.Log("remdist" + agent.remainingDistance);
-
-        //if (Input.GetMouseButtonDown(0))
-        //{ 
-        //    Health *= 0.66f;
-        //    hb.UpdateDMG(Health/MaxHealth);
-        //    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        //    if (Physics.Raycast(ray, out RaycastHit hit))
-        //    {
-        //        agent.SetDestination(hit.point);
-        //    }
-        //    if(agent.remainingDistance < agent.stoppingDistance)
-        //    {
-        //        //attack
-        //    }
-
-        //}
+        if (Chasing && target!=null)
+        {
+            agent.SetDestination(target.position);
+        }
+        if (agent.remainingDistance < agent.stoppingDistance && Time.time>=NextAttack && target!=null)
+        {
+            //attack
+            Debug.Log("attack");
+            Vector3 dir = (tr.position - target.position).normalized * 5;
+            rig.AddForce(dir,ForceMode.Impulse);
+            NextAttack = Time.time+FireRate;
+        }
 
 
 
