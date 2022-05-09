@@ -21,6 +21,7 @@ public class Infantry : MonoBehaviour
     public float x, z;
     float NextAttack = 0;
     float FireRate = 1;
+    float attackRadius = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +44,6 @@ public class Infantry : MonoBehaviour
             float radius = 20;
             nearby= Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h != this.GetComponent<Collider>()).ToArray();
-            Debug.Log("nearby l: "+nearby.Length);
 
             float closest = radius + 1;
             foreach (Collider hit in nearby)
@@ -53,7 +53,6 @@ public class Infantry : MonoBehaviour
                 {
                     closest = dis;
                     target = hit.transform;
-                    Debug.Log(this.name + " chasing: " + hit.name);
                     agent.SetDestination(target.position);
                 }
                 Chasing = true;
@@ -71,17 +70,29 @@ public class Infantry : MonoBehaviour
         {
             agent.SetDestination(target.position);
         }
-        if (agent.remainingDistance < agent.stoppingDistance && Time.time>=NextAttack && target!=null)
+        if (agent.remainingDistance < attackRadius && Time.time >= NextAttack && target != null)
         {
             //attack
             Debug.Log("attack");
+            target.SendMessage("takeDamage", 10);
             Vector3 dir = (tr.position - target.position).normalized * 5;
-            rig.AddForce(dir,ForceMode.Impulse);
             NextAttack = Time.time+FireRate;
+            agent.ResetPath();
+            rig.velocity = new Vector3(0, 0, 0);
         }
 
 
 
 
+    }
+
+    void takeDamage(float dmg)
+    {
+        Health -= dmg;
+        hb.UpdateDMG(Health/MaxHealth);
+        if (Health<=0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

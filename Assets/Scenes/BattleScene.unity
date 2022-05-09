@@ -282,6 +282,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9154782630524745673, guid: 40bc0f6d25458b24daf7c0ca774dfaa9, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9154782630524745678, guid: 40bc0f6d25458b24daf7c0ca774dfaa9, type: 3}
       propertyPath: m_Name
       value: CubeA
