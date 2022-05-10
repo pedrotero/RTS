@@ -59,7 +59,8 @@
     <Compile Include="Assets\Scripts\Infantry.cs" />
     <Compile Include="Assets\Scripts\Ground.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\SoldierButton.cs" />
+    <Compile Include="Assets\Scripts\PrepManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

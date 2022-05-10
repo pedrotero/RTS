@@ -18,10 +18,9 @@ public class Infantry : MonoBehaviour
     public Transform tr;
     private Collider[] nearby;
     private bool Chasing;
-    public float x, z;
     float NextAttack = 0;
-    float FireRate = 1;
-    float attackRadius = 2;
+    float FireRate = 2;
+    float attackRadius = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +36,6 @@ public class Infantry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        x = transform.position.x;
-        z = transform.position.z;
         if (!Chasing)
         {
             float radius = 20;
@@ -73,9 +70,10 @@ public class Infantry : MonoBehaviour
         if (agent.remainingDistance < attackRadius && Time.time >= NextAttack && target != null)
         {
             //attack
-            Debug.Log("attack");
-            target.SendMessage("takeDamage", 10);
-            Vector3 dir = (tr.position - target.position).normalized * 5;
+            Vector3 dir = (tr.position - target.position).normalized*5;
+
+            target.SendMessage("takeDamage", new Vector4(dir.x,dir.y,dir.z,10));
+            
             NextAttack = Time.time+FireRate;
             agent.ResetPath();
             rig.velocity = new Vector3(0, 0, 0);
@@ -86,13 +84,33 @@ public class Infantry : MonoBehaviour
 
     }
 
-    void takeDamage(float dmg)
+    void takeDamage(Vector4 kbdmg)
     {
-        Health -= dmg;
-        hb.UpdateDMG(Health/MaxHealth);
-        if (Health<=0)
+        Debug.Log("took Damage"+name);
+
+        Health -= kbdmg.w;
+        hb.UpdateDMG(Health / MaxHealth);
+        if (Health <= 0)
         {
             Destroy(gameObject);
         }
+        //si es un edif borrar esta parte
+        agent.isStopped = true;
+        Vector3 vkb = kbdmg;
+        rig.velocity = vkb;
+        tr.position += vkb;
+        Invoke(nameof(restartAgent), 2);
+
+        
     }
+
+    void restartAgent()
+    {
+        agent.isStopped = true;
+        Debug.Log("Hello World");
+
+    }
+
+
+
 }
