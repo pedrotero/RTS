@@ -24,10 +24,10 @@ public class Infantry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<Collider>().enabled = false;
         MaxHealth = 100;
         Health = MaxHealth;
         cv.worldCamera = Camera.main;
-        agent = GetComponent<NavMeshAgent>();
         tr = GetComponent<Transform>();
         rig = GetComponent<Rigidbody>();
         Chasing = false;
@@ -58,7 +58,11 @@ public class Infantry : MonoBehaviour
             if (nearby.Length==0)
             {
                 Chasing = false;
-                agent.ResetPath();//cambiar por nexo
+                if (agent)
+                {
+                    agent.ResetPath();
+                }
+                //cambiar por nexo
                 target = null;
             }
 
@@ -67,7 +71,7 @@ public class Infantry : MonoBehaviour
         {
             agent.SetDestination(target.position);
         }
-        if (agent.remainingDistance < attackRadius && Time.time >= NextAttack && target != null)
+        if (agent && agent.remainingDistance < attackRadius && Time.time >= NextAttack && target != null)
         {
             //attack
             Vector3 dir = (tr.position - target.position).normalized*5;
@@ -111,6 +115,9 @@ public class Infantry : MonoBehaviour
 
     }
 
-
+    public void activateAgent()
+    {
+        agent = gameObject.AddComponent<NavMeshAgent>();
+    }
 
 }
