@@ -14,10 +14,10 @@ public class Infantry : MonoBehaviour
     public HealthBar hb;
     public bool team;
     private Rigidbody rig;
-    public Transform target;
+    public Transform target; //objetivo como tal
     public Transform tr;
     private Collider[] nearby;
-    private bool Chasing;
+    private bool Chasing;  //persiguiendo a alguien
     float NextAttack = 0;
     float FireRate = 2;
     float attackRadius = 1;
@@ -30,7 +30,7 @@ public class Infantry : MonoBehaviour
         cv.worldCamera = Camera.main;
         tr = GetComponent<Transform>();
         rig = GetComponent<Rigidbody>();
-        Chasing = false;
+        Chasing = false;  //
     }
 
     // Update is called once per frame
@@ -82,10 +82,6 @@ public class Infantry : MonoBehaviour
             agent.ResetPath();
             rig.velocity = new Vector3(0, 0, 0);
         }
-
-
-
-
     }
 
     void takeDamage(Vector4 kbdmg)
