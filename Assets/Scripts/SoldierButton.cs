@@ -27,20 +27,21 @@ public class SoldierButton : MonoBehaviour
                 Debug.Log("mauspos " + hit.point);
                 dragged.transform.position = hit.point;
             }
-            
+            if (Input.GetMouseButtonDown(0))
+            {
+                dragged.GetComponent<Collider>().enabled = true;
+                dragged.activateAgent();
+                dragging = false;
+            }
         }
     }
 
 
     private void OnMouseDown()
     {
-        if (dragging)
-        {
-            dragged.GetComponent<Collider>().enabled = true;
-            dragged.activateAgent();
-            dragging = false;
-        }
     }
+
+    
 
     public void DragSoldier()
     {
