@@ -66,7 +66,7 @@ public class Infantry : MonoBehaviour
             }
 
         }
-        if (Chasing && target!=null)
+        if (Chasing && target)
         {
             agent.SetDestination(target.position);
         }
@@ -78,13 +78,15 @@ public class Infantry : MonoBehaviour
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-                Vector3 dir = (tr.position - target.position).normalized * 10;
+                Vector3 dir = (tr.position - target.position).normalized * 5;
 
                 target.SendMessage("takeDamage", new Vector4(dir.x, dir.y, dir.z, 10));
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();
+                target = null;
                 agent.isStopped = true;
+                Chasing = false;
                 Vector3 vkb = dir; //en direccion contraria 
                 rig.velocity = vkb;
                 Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
@@ -120,6 +122,7 @@ public class Infantry : MonoBehaviour
     {
         agent.isStopped = false;
         Debug.Log("Hello World");
+        rig.velocity = new Vector3(0, 0, 0);
 
     }
 

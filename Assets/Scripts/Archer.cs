@@ -74,24 +74,37 @@ public class Archer : MonoBehaviour
             }
 
         }
+        if (Chasing && target)
+        {
+            agent.SetDestination(target.position);
+        }
         if (target)
         {
             Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
             float dist2Att = (attackPoint - tr.position).magnitude;
-            if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
+            if (agent && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-
+                Debug.Log("asjdiajdai");
                 target.SendMessage("takeDamage", new Vector4(0, 0, 0, 3));
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();
-                agent.isStopped = true;
-                Vector3 vkb = new Vector3(0,0,0); //en direccion contraria 
-                rig.velocity = vkb;
-                Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
                 DrawLaser(target.position);
+                target = null;
+                agent.isStopped = true;
+                Chasing = false;
+                Invoke(nameof(restartAgent), 0);
                 Invoke(nameof(EraseLaser), 0.2f);
+            }
+            else if(agent && dist2Att <= attackRadius)
+            {
+                agent.ResetPath();
+                target = null;
+                agent.isStopped = true;
+                Chasing = false;
+                Invoke(nameof(restartAgent), 0);
+
             }
         }
     }
@@ -119,6 +132,7 @@ public class Archer : MonoBehaviour
     {
         agent.isStopped = false;
         Debug.Log("Hello World");
+        rig.velocity = new Vector3(0, 0, 0);
 
     }
 
