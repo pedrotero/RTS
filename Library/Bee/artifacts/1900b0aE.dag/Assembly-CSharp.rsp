@@ -302,8 +302,6 @@
 -r:"D:/unity/2021.1.0f1/Editor/Data/NetStandard/Extensions/2.0.0/System.Numerics.Vectors.dll"
 -r:"D:/unity/2021.1.0f1/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
 -r:"D:/unity/2021.1.0f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll"
--r:"Library/Bee/artifacts/1900b0aE.dag/NavMeshComponents.ref.dll"
--r:"Library/Bee/artifacts/1900b0aE.dag/NavMeshComponentsEditor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.ref.dll"
