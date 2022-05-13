@@ -86,6 +86,7 @@ public class Archer : MonoBehaviour
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();
+                agent.isStopped = true;
                 rig.velocity = new Vector3(0, 0, 0);
                 DrawLaser(target.position);
                 Invoke(nameof(EraseLaser), 0.2f);
