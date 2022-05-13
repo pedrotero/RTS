@@ -7,7 +7,6 @@ using UnityEngine.AI;
 public class Infantry : MonoBehaviour
 {
     private NavMeshAgent agent;
-    public int playerV;
     float Health;
     float MaxHealth;
     public Canvas cv;
@@ -71,16 +70,22 @@ public class Infantry : MonoBehaviour
         {
             agent.SetDestination(target.position);
         }
-        if (agent && agent.remainingDistance < attackRadius && Time.time >= NextAttack && target != null)
-        {
-            //attack
-            Vector3 dir = (tr.position - target.position).normalized*2;
 
-            target.SendMessage("takeDamage", new Vector4(dir.x,dir.y,dir.z,10));
-            
-            NextAttack = Time.time+FireRate;
-            agent.ResetPath();
-            rig.velocity = new Vector3(0, 0, 0);
+        if (target)
+        {
+            Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
+            float dist2Att = (attackPoint - tr.position).magnitude;
+            if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
+            {
+                //attack
+                Vector3 dir = (tr.position - target.position).normalized * 2;
+
+                target.SendMessage("takeDamage", new Vector4(dir.x, dir.y, dir.z, 10));
+
+                NextAttack = Time.time + FireRate;
+                agent.ResetPath();
+                rig.velocity = new Vector3(0, 0, 0);
+            }
         }
 
 
@@ -102,8 +107,7 @@ public class Infantry : MonoBehaviour
         agent.isStopped = true;
         Vector3 vkb = -kbdmg; //en direccion contraria 
         rig.velocity = vkb;
-        tr.position += vkb;
-        Invoke(nameof(restartAgent), 2);
+        Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
 
         
     }

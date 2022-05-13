@@ -18,8 +18,9 @@ public class Archer : MonoBehaviour
     private Collider[] nearby;
     private bool Chasing;
     float NextAttack = 0;
-    float FireRate = 4;
-    float attackRadius = 2;
+    float FireRate = 0.5f;
+    float attackRadius = 20;
+    LineRenderer lr;
 
 
     void Start()
@@ -30,6 +31,7 @@ public class Archer : MonoBehaviour
         cv.worldCamera = Camera.main;
         tr = GetComponent<Transform>();
         rig = GetComponent<Rigidbody>();
+        lr = GetComponent<LineRenderer>();
         Chasing = false;
     }
 
@@ -39,11 +41,11 @@ public class Archer : MonoBehaviour
     {
         if (!Chasing)
         {
-            float radius = 20, radius2 = 40;
-            nearby = Physics.OverlapSphere(tr.position, radius2, 8);
+            float radius = 40;
+            nearby = Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h != this.GetComponent<Collider>()).ToArray();
 
-            float closest = radius2 + 1;
+            float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
                 float dis = Vector3.Distance(hit.transform.position, tr.position);
@@ -72,20 +74,22 @@ public class Archer : MonoBehaviour
             }
 
         }
-        if (Chasing && target != null)
+        if (target)
         {
-            agent.SetDestination(target.position);
-        }
-        if (agent && agent.remainingDistance < attackRadius && Time.time >= NextAttack && target != null)
-        {
-            //attack
-            Vector3 dir = (tr.position - target.position).normalized * 5;
+            Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
+            float dist2Att = (attackPoint - tr.position).magnitude;
+            if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
+            {
+                //attack
 
-            target.SendMessage("takeDamage", new Vector4(dir.x, dir.y, dir.z, 10));
+                target.SendMessage("takeDamage", new Vector4(0, 0, 0, 3));
 
-            NextAttack = Time.time + FireRate;
-            agent.ResetPath();
-            rig.velocity = new Vector3(0, 0, 0);
+                NextAttack = Time.time + FireRate;
+                agent.ResetPath();
+                rig.velocity = new Vector3(0, 0, 0);
+                DrawLaser(target.position);
+                Invoke(nameof(EraseLaser), 0.2f);
+            }
         }
     }
 
@@ -101,9 +105,39 @@ public class Archer : MonoBehaviour
         }
         //si es un edif borrar esta parte
         agent.isStopped = true;
-        Vector3 vkb = kbdmg;
+        Vector3 vkb = -kbdmg;
         rig.velocity = vkb;
-        tr.position += vkb;
+        Invoke(nameof(restartAgent), vkb.magnitude*0.2f);
     }
 
+
+    void restartAgent()
+    {
+        agent.isStopped = false;
+        Debug.Log("Hello World");
+
+    }
+
+
+    void DrawLaser(Vector3 obj)
+    {
+        lr.SetPosition(0, tr.position);
+        lr.SetPosition(1, obj);
+        lr.startWidth = 0.2f;
+        lr.endWidth = 0.2f;
+        
+    }
+
+    void EraseLaser()
+    {
+        lr.SetPosition(0, tr.position);
+        lr.SetPosition(1, tr.position);
+        lr.startWidth = 0f;
+        lr.endWidth = 0f;
+    }
+
+    public void activateAgent()
+    {
+        agent = gameObject.AddComponent<NavMeshAgent>();
+    }
 }
