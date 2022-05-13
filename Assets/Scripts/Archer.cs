@@ -87,7 +87,9 @@ public class Archer : MonoBehaviour
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();
                 agent.isStopped = true;
-                rig.velocity = new Vector3(0, 0, 0);
+                Vector3 vkb = new Vector3(0,0,0); //en direccion contraria 
+                rig.velocity = vkb;
+                Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
                 DrawLaser(target.position);
                 Invoke(nameof(EraseLaser), 0.2f);
             }
@@ -103,6 +105,7 @@ public class Archer : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(gameObject);
+            return;
         }
         //si es un edif borrar esta parte
         agent.isStopped = true;

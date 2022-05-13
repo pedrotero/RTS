@@ -78,13 +78,16 @@ public class Infantry : MonoBehaviour
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-                Vector3 dir = (tr.position - target.position).normalized * 2;
+                Vector3 dir = (tr.position - target.position).normalized * 10;
 
                 target.SendMessage("takeDamage", new Vector4(dir.x, dir.y, dir.z, 10));
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();
-                rig.velocity = new Vector3(0, 0, 0);
+                agent.isStopped = true;
+                Vector3 vkb = dir; //en direccion contraria 
+                rig.velocity = vkb;
+                Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
             }
         }
 
@@ -102,6 +105,7 @@ public class Infantry : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(gameObject);
+            return;
         }
         //si es un edif borrar esta parte
         agent.isStopped = true;
