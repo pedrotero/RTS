@@ -4,27 +4,18 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Archer : MonoBehaviour
+public class Archer : Soldier
 {
-    private NavMeshAgent agent;
-    float Health;
-    float MaxHealth;
-    public Canvas cv;
-    public HealthBar hb;
-    public bool team;
-    private Rigidbody rig;
-    public Transform target;
-    public Transform tr;
-    private Collider[] nearby;
-    private bool Chasing;
-    float NextAttack = 0;
-    float FireRate = 0.5f;
-    float attackRadius = 20;
+    
     LineRenderer lr;
+
 
 
     void Start()
     {
+        NextAttack = 0;
+        FireRate = 0.5f;
+        attackRadius = 20;
         GetComponent<Collider>().enabled = false;
         MaxHealth = 50;
         Health = MaxHealth;
@@ -85,7 +76,6 @@ public class Archer : MonoBehaviour
             if (agent && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-                Debug.Log("asjdiajdai");
                 target.SendMessage("takeDamage", new Vector4(0, 0, 0, 3));
 
                 NextAttack = Time.time + FireRate;
@@ -109,32 +99,6 @@ public class Archer : MonoBehaviour
         }
     }
 
-    void takeDamage(Vector4 kbdmg)
-    {
-        Debug.Log("took Damage" + name);
-
-        Health -= kbdmg.w;
-        hb.UpdateDMG(Health / MaxHealth);
-        if (Health <= 0)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        //si es un edif borrar esta parte
-        agent.isStopped = true;
-        Vector3 vkb = -kbdmg;
-        rig.velocity = vkb;
-        Invoke(nameof(restartAgent), vkb.magnitude*0.2f);
-    }
-
-
-    void restartAgent()
-    {
-        agent.isStopped = false;
-        Debug.Log("Hello World");
-        rig.velocity = new Vector3(0, 0, 0);
-
-    }
 
 
     void DrawLaser(Vector3 obj)
@@ -154,8 +118,5 @@ public class Archer : MonoBehaviour
         lr.endWidth = 0f;
     }
 
-    public void activateAgent()
-    {
-        agent = gameObject.AddComponent<NavMeshAgent>();
-    }
+
 }

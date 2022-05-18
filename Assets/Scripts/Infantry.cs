@@ -4,25 +4,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Infantry : MonoBehaviour
+public class Infantry : Soldier
 {
-    private NavMeshAgent agent;
-    float Health;
-    float MaxHealth;
-    public Canvas cv;
-    public HealthBar hb;
-    public bool team;
-    private Rigidbody rig;
-    public Transform target;
-    public Transform tr;
-    private Collider[] nearby;
-    private bool Chasing;
-    float NextAttack = 0;
-    float FireRate = 2;
-    float attackRadius = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
+        NextAttack = 0;
+        FireRate = 2;
+        attackRadius = 1;
         GetComponent<Collider>().enabled = false;
         MaxHealth = 100;
         Health = MaxHealth;
@@ -98,37 +88,8 @@ public class Infantry : MonoBehaviour
 
     }
 
-    void takeDamage(Vector4 kbdmg)
-    {
-        Debug.Log("took Damage"+name);
 
-        Health -= kbdmg.w;
-        hb.UpdateDMG(Health / MaxHealth);
-        if (Health <= 0)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        //si es un edif borrar esta parte
-        agent.isStopped = true;
-        Vector3 vkb = -kbdmg; //en direccion contraria 
-        rig.velocity = vkb;
-        Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
+    
 
-        
-    }
-
-    void restartAgent()
-    {
-        agent.isStopped = false;
-        Debug.Log("Hello World");
-        rig.velocity = new Vector3(0, 0, 0);
-
-    }
-
-    public void activateAgent()
-    {
-        agent = gameObject.AddComponent<NavMeshAgent>();
-    }
 
 }
