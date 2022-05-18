@@ -4,27 +4,18 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Archer : MonoBehaviour
+public class Archer : Soldier
 {
-    private NavMeshAgent agent;
-    float Health;
-    float MaxHealth;
-    public Canvas cv;
-    public HealthBar hb;
-    public bool team;
-    private Rigidbody rig;
-    public Transform target;
-    public Transform tr;
-    private Collider[] nearby;
-    private bool Chasing;
-    float NextAttack = 0;
-    float FireRate = 0.5f;
-    float attackRadius = 20;
+    
     LineRenderer lr;
+
 
 
     void Start()
     {
+        NextAttack = 0;
+        FireRate = 0.5f;
+        attackRadius = 20;
         GetComponent<Collider>().enabled = false;
         MaxHealth = 50;
         Health = MaxHealth;
@@ -33,17 +24,19 @@ public class Archer : MonoBehaviour
         rig = GetComponent<Rigidbody>();
         lr = GetComponent<LineRenderer>();
         Chasing = false;
+        
+
     }
 
 
 
     void Update()
     {
-        if (!Chasing)
+        if (!Chasing && agent)
         {
             float radius = 40;
             nearby = Physics.OverlapSphere(tr.position, radius, 8);
-            nearby = nearby.Where(h => h != this.GetComponent<Collider>()).ToArray();
+            nearby = nearby.Where(h => h.GetComponent<Soldier>().team != team).ToArray();
 
             float closest = radius + 1;
             foreach (Collider hit in nearby)
@@ -52,10 +45,10 @@ public class Archer : MonoBehaviour
                 if (dis <= closest)
                 {
                     closest = dis; //asigna al mas cercano 
-                    target = hit.transform; //posicion del objetivo como tal
+                    target = hit.GetComponent<Soldier>(); //posicion del objetivo como tal
                     if (true)  //vamos a comparar si llego al radio menor
                     {
-                        agent.SetDestination(target.position);
+                        agent.SetDestination(target.tr.position);
                     }
 
                 }
@@ -74,23 +67,22 @@ public class Archer : MonoBehaviour
             }
 
         }
-        if (Chasing && target)
+        if (Chasing && target && agent)
         {
-            agent.SetDestination(target.position);
+            agent.SetDestination(target.tr.position);
         }
-        if (target)
+        if (target && agent)
         {
             Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
             float dist2Att = (attackPoint - tr.position).magnitude;
             if (agent && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-                Debug.Log("asjdiajdai");
                 target.SendMessage("takeDamage", new Vector4(0, 0, 0, 3));
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();
-                DrawLaser(target.position);
+                DrawLaser(target.tr.position);
                 target = null;
                 agent.isStopped = true;
                 Chasing = false;
@@ -109,36 +101,12 @@ public class Archer : MonoBehaviour
         }
     }
 
-    void takeDamage(Vector4 kbdmg)
-    {
-        Debug.Log("took Damage" + name);
-
-        Health -= kbdmg.w;
-        hb.UpdateDMG(Health / MaxHealth);
-        if (Health <= 0)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        //si es un edif borrar esta parte
-        agent.isStopped = true;
-        Vector3 vkb = -kbdmg;
-        rig.velocity = vkb;
-        Invoke(nameof(restartAgent), vkb.magnitude*0.2f);
-    }
-
-
-    void restartAgent()
-    {
-        agent.isStopped = false;
-        Debug.Log("Hello World");
-        rig.velocity = new Vector3(0, 0, 0);
-
-    }
 
 
     void DrawLaser(Vector3 obj)
     {
+        lr.startColor = team ? Color.blue : Color.red;
+        lr.endColor = team ? Color.blue : Color.red;
         lr.SetPosition(0, tr.position);
         lr.SetPosition(1, obj);
         lr.startWidth = 0.2f;
@@ -154,8 +122,5 @@ public class Archer : MonoBehaviour
         lr.endWidth = 0f;
     }
 
-    public void activateAgent()
-    {
-        agent = gameObject.AddComponent<NavMeshAgent>();
-    }
+
 }

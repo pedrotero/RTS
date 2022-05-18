@@ -213,11 +213,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6112b0cefe39ce94db438f9d6354c898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  Health: 0
+  MaxHealth: 0
   cv: {fileID: 538390119470231044}
   hb: {fileID: 8039068755598308030}
   team: 0
+  rig: {fileID: 0}
   target: {fileID: 0}
   tr: {fileID: 3471649613555841940}
+  nearby: []
+  Chasing: 0
+  NextAttack: 0
+  FireRate: 0
+  attackRadius: 0
 --- !u!120 &8012895576186930280
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -226,7 +235,7 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6659846045281166497}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -238,7 +247,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cdab5ef5c3563744d8c1b2daca53ccb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -260,8 +269,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 21.91, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -270,7 +279,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.23129654
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -331,7 +340,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 90
   m_CollisionDetection: 0
 --- !u!1001 &4796282044180519159
 PrefabInstance:

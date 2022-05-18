@@ -364,12 +364,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e3daf71213d954da9409ac9a2221ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerV: 10
+  agent: {fileID: 0}
+  Health: 0
+  MaxHealth: 0
   cv: {fileID: 715262645055805085}
   hb: {fileID: 610967211082201718}
   team: 0
+  rig: {fileID: 0}
   target: {fileID: 0}
   tr: {fileID: 9154782630524745672}
+  nearby: []
+  Chasing: 0
+  NextAttack: 0
+  FireRate: 0
+  attackRadius: 0
 --- !u!54 &9154782630524745679
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -384,7 +392,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 36
+  m_Constraints: 90
   m_CollisionDetection: 0
 --- !u!136 &5480557103414945445
 CapsuleCollider:
