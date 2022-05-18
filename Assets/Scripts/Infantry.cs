@@ -49,7 +49,7 @@ public class Infantry : Soldier
                 Chasing = false;
                 agent.ResetPath();
                 //cambiar por nexo
-                target = null;
+                target = nexoTarget;
             }
 
         }

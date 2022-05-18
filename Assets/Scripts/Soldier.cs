@@ -20,6 +20,7 @@ public class Soldier : MonoBehaviour
     public float NextAttack;
     public float FireRate;
     public float attackRadius;
+    public Nexo nexoTarget;
     // Start is called before the first frame update
 
     public void takeDamage(Vector4 kbdmg)
@@ -61,9 +62,9 @@ public class Soldier : MonoBehaviour
     }
 
 
-    public void activateAgent(bool t)
+    public void activateAgent(bool t,Nexo n)
     {
-
+        nexoTarget = n;
         team = t;
         agent = gameObject.AddComponent<NavMeshAgent>();
         gameObject.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;

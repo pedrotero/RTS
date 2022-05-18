@@ -26,6 +26,7 @@ public class SoldierSpawnButton : MonoBehaviour
             Physics.Raycast(MausRay, out hit, 64);
             if (hit.collider)
             {
+                
                 dragged.transform.position = hit.point;
             }
             else

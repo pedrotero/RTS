@@ -63,7 +63,7 @@ public class Archer : Soldier
                     agent.ResetPath();
                 }
                 //cambiar por nexo
-                target = null;
+                target = nexoTarget;
             }
 
         }

@@ -9,6 +9,8 @@ public class PrepManager : MonoBehaviour
     public int Budget;
     public Text budt;
     public bool team;
+    public Nexo nexo;
+    public PrepManager otherPrep;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +40,15 @@ public class PrepManager : MonoBehaviour
 
     public void ChangeScreen()
     {
-        int x = team ? 0 : 70;
+        int x = 70;
+        int y = 80;
+        if (team)
+        {
+            x = 0;
+            y = 90;
+        }
 
-        Vector3 newPos = new Vector3(x, 80, 0);
+        Vector3 newPos = new Vector3(x, y, 0);
         Camera.main.transform.position = newPos;
     }
 
@@ -48,7 +56,7 @@ public class PrepManager : MonoBehaviour
     {
         foreach (Soldier sol in soldiers)
         {
-            sol.activateAgent(team);
+            sol.activateAgent(team,otherPrep.nexo);
         }
     }
 
