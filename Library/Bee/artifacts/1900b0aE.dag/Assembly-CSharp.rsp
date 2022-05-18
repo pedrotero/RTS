@@ -324,6 +324,7 @@
 "Assets/Scripts/Ground.cs"
 "Assets/Scripts/HealthBar.cs"
 "Assets/Scripts/Infantry.cs"
+"Assets/Scripts/Nexo.cs"
 "Assets/Scripts/PrepManager.cs"
 "Assets/Scripts/Soldier.cs"
 "Assets/Scripts/SoldierSpawnButton.cs"

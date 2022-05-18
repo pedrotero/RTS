@@ -13,7 +13,7 @@ public class Soldier : MonoBehaviour
     public HealthBar hb;
     public bool team;
     public Rigidbody rig;
-    public Transform target;
+    public Soldier target;
     public Transform tr;
     public Collider[] nearby;
     public bool Chasing;
@@ -33,17 +33,25 @@ public class Soldier : MonoBehaviour
             return;
         }
         //si es un edif borrar esta parte
-        agent.isStopped = true;
-        Vector3 vkb = -kbdmg; //en direccion contraria 
-        rig.velocity = vkb;
-        Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
+        if (agent)
+        {
+            agent.isStopped = true;
+            Vector3 vkb = -kbdmg; //en direccion contraria 
+            rig.velocity = vkb;
+            Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
+        }
+        
 
 
     }
 
     public void restartAgent()
     {
-        agent.isStopped = false;
+        if (agent)
+        {
+            agent.isStopped = false;
+        }
+        
         rig.velocity = new Vector3(0, 0, 0);
     }
 
@@ -55,7 +63,9 @@ public class Soldier : MonoBehaviour
 
     public void activateAgent(bool t)
     {
+
         team = t;
         agent = gameObject.AddComponent<NavMeshAgent>();
+        gameObject.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
     }
 }

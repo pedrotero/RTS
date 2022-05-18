@@ -24,17 +24,19 @@ public class Archer : Soldier
         rig = GetComponent<Rigidbody>();
         lr = GetComponent<LineRenderer>();
         Chasing = false;
+        
+
     }
 
 
 
     void Update()
     {
-        if (!Chasing)
+        if (!Chasing && agent)
         {
             float radius = 40;
             nearby = Physics.OverlapSphere(tr.position, radius, 8);
-            nearby = nearby.Where(h => h != this.GetComponent<Collider>()).ToArray();
+            nearby = nearby.Where(h => h.GetComponent<Soldier>().team != team).ToArray();
 
             float closest = radius + 1;
             foreach (Collider hit in nearby)
@@ -43,10 +45,10 @@ public class Archer : Soldier
                 if (dis <= closest)
                 {
                     closest = dis; //asigna al mas cercano 
-                    target = hit.transform; //posicion del objetivo como tal
+                    target = hit.GetComponent<Soldier>(); //posicion del objetivo como tal
                     if (true)  //vamos a comparar si llego al radio menor
                     {
-                        agent.SetDestination(target.position);
+                        agent.SetDestination(target.tr.position);
                     }
 
                 }
@@ -65,11 +67,11 @@ public class Archer : Soldier
             }
 
         }
-        if (Chasing && target)
+        if (Chasing && target && agent)
         {
-            agent.SetDestination(target.position);
+            agent.SetDestination(target.tr.position);
         }
-        if (target)
+        if (target && agent)
         {
             Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
             float dist2Att = (attackPoint - tr.position).magnitude;
@@ -80,7 +82,7 @@ public class Archer : Soldier
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();
-                DrawLaser(target.position);
+                DrawLaser(target.tr.position);
                 target = null;
                 agent.isStopped = true;
                 Chasing = false;
@@ -103,6 +105,8 @@ public class Archer : Soldier
 
     void DrawLaser(Vector3 obj)
     {
+        lr.startColor = team ? Color.blue : Color.red;
+        lr.endColor = team ? Color.blue : Color.red;
         lr.SetPosition(0, tr.position);
         lr.SetPosition(1, obj);
         lr.startWidth = 0.2f;

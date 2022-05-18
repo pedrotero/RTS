@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class PrepManager : MonoBehaviour
 {
+    public List<Soldier> soldiers;
     public int Budget;
     public Text budt;
-    public static PrepManager instance;
+    public bool team;
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
+
     }
 
     // Update is called once per frame
@@ -34,5 +35,21 @@ public class PrepManager : MonoBehaviour
         }
     }
 
+
+    public void ChangeScreen()
+    {
+        int x = team ? 0 : 70;
+
+        Vector3 newPos = new Vector3(x, 80, 0);
+        Camera.main.transform.position = newPos;
+    }
+
+    public void BeginGame()
+    {
+        foreach (Soldier sol in soldiers)
+        {
+            sol.activateAgent(team);
+        }
+    }
 
 }

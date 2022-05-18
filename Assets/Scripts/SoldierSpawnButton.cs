@@ -6,9 +6,10 @@ public class SoldierSpawnButton : MonoBehaviour
 {
     bool dragging = false;
     Soldier dragged;
-    public bool team = false;
+    public bool team;
     public Soldier SoldierPrefab;
     public int price;
+    public PrepManager prep;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,20 +26,17 @@ public class SoldierSpawnButton : MonoBehaviour
             Physics.Raycast(MausRay, out hit, 64);
             if (hit.collider)
             {
-                Debug.Log("mauspos " + hit.point);
                 dragged.transform.position = hit.point;
             }
             else
             {
-                Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 80);
                 dragged.transform.position = new Vector3(mauspos.x, 0, mauspos.z);
             }
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("nigga");
 
                 dragged.GetComponent<Collider>().enabled = true;
-                dragged.activateAgent(true);
                 dragging = false;
             }
         }
@@ -51,15 +49,14 @@ public class SoldierSpawnButton : MonoBehaviour
 
     public void DragSoldier()
     {
-        if (PrepManager.instance.canAfford(price))
+        if (prep.canAfford(price))
         {
-            Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition+Vector3.forward*80);
             dragging = true;
-            Debug.Log("nigga " + mauspos);
-            Debug.Log("pooopooo " + dragging);
             int x = team ? 100 : -100;
 
             dragged = Instantiate(SoldierPrefab, new Vector3(x, 0, 0), Quaternion.identity);
+            prep.soldiers.Add(dragged);
         }
 
 

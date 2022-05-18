@@ -12,7 +12,7 @@ public class Infantry : Soldier
     {
         NextAttack = 0;
         FireRate = 2;
-        attackRadius = 1;
+        attackRadius = 4;
         GetComponent<Collider>().enabled = false;
         MaxHealth = 100;
         Health = MaxHealth;
@@ -25,21 +25,21 @@ public class Infantry : Soldier
     // Update is called once per frame
     void Update()
     {
-        if (!Chasing)
+        if (!Chasing && agent)
         {
             float radius = 20;
             nearby= Physics.OverlapSphere(tr.position, radius, 8);
-            nearby = nearby.Where(h => h != this.GetComponent<Collider>()).ToArray();
-
+            nearby = nearby.Where(h => h.GetComponent<Soldier>().team != team).ToArray();
             float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
+                
                 float dis = Vector3.Distance(hit.transform.position, tr.position);
                 if (dis <= closest)
                 {
                     closest = dis;
-                    target = hit.transform;
-                    agent.SetDestination(target.position);
+                    target = hit.GetComponent<Soldier>();
+                    agent.SetDestination(target.tr.position);
                 }
                 Chasing = true;
                 
@@ -47,28 +47,25 @@ public class Infantry : Soldier
             if (nearby.Length==0)
             {
                 Chasing = false;
-                if (agent)
-                {
-                    agent.ResetPath();
-                }
+                agent.ResetPath();
                 //cambiar por nexo
                 target = null;
             }
 
         }
-        if (Chasing && target)
+        if (Chasing && target && agent)
         {
-            agent.SetDestination(target.position);
+            agent.SetDestination(target.tr.position);
         }
 
-        if (target)
+        if (target && agent)
         {
             Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
             float dist2Att = (attackPoint - tr.position).magnitude;
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-                Vector3 dir = (tr.position - target.position).normalized * 5;
+                Vector3 dir = (tr.position - target.tr.position).normalized * 5;
 
                 target.SendMessage("takeDamage", new Vector4(dir.x, dir.y, dir.z, 10));
 
