@@ -4,17 +4,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Soldier : MonoBehaviour
+public class Soldier : Unit
 {
     public NavMeshAgent agent;
-    public float Health;
-    public float MaxHealth;
-    public Canvas cv;
-    public HealthBar hb;
-    public bool team;
     public Rigidbody rig;
-    public Soldier target;
-    public Transform tr;
+    public Unit target;
     public Collider[] nearby;
     public bool Chasing;
     public float NextAttack;

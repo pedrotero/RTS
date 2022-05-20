@@ -11,6 +11,7 @@ public class PrepManager : MonoBehaviour
     public bool team;
     public Nexo nexo;
     public PrepManager otherPrep;
+    public bool HayNexo=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,24 +41,33 @@ public class PrepManager : MonoBehaviour
 
     public void ChangeScreen()
     {
-        int x = 70;
-        int y = 80;
-        if (team)
+        if (HayNexo)
         {
-            x = 0;
-            y = 90;
-        }
+            int x = 70;
+            int y = 80;
+            if (team)
+            {
+                x = 0;
+                y = 90;
+            }
 
-        Vector3 newPos = new Vector3(x, y, 0);
-        Camera.main.transform.position = newPos;
+            Vector3 newPos = new Vector3(x, y, 0);
+            Camera.main.transform.position = newPos;
+        }
+        
     }
 
     public void BeginGame()
     {
-        foreach (Soldier sol in soldiers)
+        if (HayNexo && otherPrep.HayNexo)
         {
-            sol.activateAgent(team,otherPrep.nexo);
+            foreach (Soldier sol in soldiers)
+            {
+                sol.activateAgent(team, otherPrep.nexo);
+
+            }
         }
+        
     }
 
 }

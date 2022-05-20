@@ -57,17 +57,17 @@ public class Archer : Soldier
             }
             if (nearby.Length == 0)
             {
-                Chasing = false;
                 if (agent)
                 {
                     agent.ResetPath();
                 }
                 //cambiar por nexo
                 target = nexoTarget;
+                Chasing = false;
             }
 
         }
-        if (Chasing && target && agent)
+        if (target && agent && agent.isOnNavMesh)
         {
             agent.SetDestination(target.tr.position);
         }

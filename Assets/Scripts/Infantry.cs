@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class Infantry : Soldier
 {
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -46,14 +45,17 @@ public class Infantry : Soldier
             }
             if (nearby.Length==0)
             {
-                Chasing = false;
-                agent.ResetPath();
+                if (agent && agent.isOnNavMesh)
+                {
+                    agent.ResetPath();
+                }
                 //cambiar por nexo
                 target = nexoTarget;
+                Chasing = false;
             }
 
         }
-        if (Chasing && target && agent)
+        if (target && agent && agent.isOnNavMesh)
         {
             agent.SetDestination(target.tr.position);
         }

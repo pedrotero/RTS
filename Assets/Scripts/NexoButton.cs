@@ -62,6 +62,7 @@ public class NexoButton : MonoBehaviour
             HayNexo = true;
             GetComponent<Button>().enabled = false;
             prep.nexo = dragged;
+            prep.HayNexo = true;
             //prep.soldiers.Add(dragged);
         }
 
