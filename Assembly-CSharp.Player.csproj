@@ -61,10 +61,12 @@
     <Compile Include="Assets\Scripts\Ground.cs" />
     <Compile Include="Assets\Scripts\PrepManager.cs" />
     <Compile Include="Assets\Scripts\Soldier.cs" />
+    <Compile Include="Assets\Scripts\NexoButton.cs" />
     <Compile Include="Assets\Scripts\Archer.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Nexo.cs" />
-    <Compile Include="Assets\Scripts\NexoButton.cs" />
+    <Compile Include="Assets\Scripts\TankSpawnButton.cs" />
+    <Compile Include="Assets\Scripts\Tank.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
