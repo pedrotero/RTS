@@ -31,7 +31,7 @@ public class WallButton : MonoBehaviour
         }
         else
         {
-            mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 80);
+            mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
         }
 
 
@@ -47,9 +47,8 @@ public class WallButton : MonoBehaviour
             Vector3 dir = endPos - startPos;
             float angle = Vector3.SignedAngle(Vector3.right, dir,Vector3.right);
             float size = Mathf.Abs((endPos - startPos).magnitude);
-            dragged.transform.localScale = new Vector3(size, 1, 1);
+            dragged.transform.localScale = new Vector3(size, 5, 2);
             dragged.transform.rotation = Quaternion.Euler(new Vector3(0,angle,0));
-            Debug.Log(Vector3.Angle(startPos, endPos));
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -62,7 +61,17 @@ public class WallButton : MonoBehaviour
             else if (draggingwall)
             {
                 draggingwall = false;
-                dragged.GetComponent<Collider>().enabled = true;
+                if (prep.canAfford((int)(startPos-endPos).magnitude*5))
+                {
+                    dragged.GetComponent<Collider>().enabled = true;
+                }
+                else
+                {
+                    Destroy(dragged.gameObject);
+                    dragged = null;
+                }
+                Debug.Log("Hello World "+dragged);
+
             }
         }
 
@@ -74,15 +83,12 @@ public class WallButton : MonoBehaviour
 
     public void CreateWall()
     {
-        if (prep.canAfford(price))
-        {
-            mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 80);
+            mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
             dragging = true;
             int x = team ? 100 : -100;
 
             dragged = Instantiate(WallPrefab, new Vector3(x, 0, 0), Quaternion.identity);
             //prep.soldiers.Add(dragged);
-        }
 
 
     }

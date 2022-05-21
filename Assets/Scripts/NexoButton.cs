@@ -33,7 +33,7 @@ public class NexoButton : MonoBehaviour
             }
             else
             {
-                Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 80);
+                Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
                 dragged.transform.position = new Vector3(mauspos.x, 4, mauspos.z);
             }
             if (Input.GetMouseButtonDown(0))
@@ -54,7 +54,7 @@ public class NexoButton : MonoBehaviour
     {
         if (!HayNexo)
         {
-            Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 80);
+            Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
             dragging = true;
             int x = team ? 100 : -100;
 

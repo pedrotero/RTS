@@ -31,7 +31,7 @@ public class SoldierSpawnButton : MonoBehaviour
             }
             else
             {
-                Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 80);
+                Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
                 dragged.transform.position = new Vector3(mauspos.x, 0, mauspos.z);
             }
             if (Input.GetMouseButtonDown(0))
@@ -52,7 +52,7 @@ public class SoldierSpawnButton : MonoBehaviour
     {
         if (prep.canAfford(price))
         {
-            Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition+Vector3.forward*80);
+            Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition+Vector3.forward*90);
             dragging = true;
             int x = team ? 100 : -100;
 

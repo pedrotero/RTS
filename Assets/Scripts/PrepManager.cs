@@ -43,8 +43,8 @@ public class PrepManager : MonoBehaviour
     {
         if (HayNexo)
         {
-            int x = 70;
-            int y = 80;
+            int x = 113;
+            int y = 90;
             if (team)
             {
                 x = 0;

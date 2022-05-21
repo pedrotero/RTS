@@ -17,7 +17,7 @@ public class Archer : Soldier
         FireRate = 0.5f;
         attackRadius = 20;
         GetComponent<Collider>().enabled = false;
-        MaxHealth = 50;
+        MaxHealth = 25;
         Health = MaxHealth;
         cv.worldCamera = Camera.main;
         tr = GetComponent<Transform>();
@@ -37,7 +37,6 @@ public class Archer : Soldier
             float radius = 40;
             nearby = Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h.GetComponent<Soldier>().team != team).ToArray();
-
             float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
@@ -46,10 +45,7 @@ public class Archer : Soldier
                 {
                     closest = dis; //asigna al mas cercano 
                     target = hit.GetComponent<Soldier>(); //posicion del objetivo como tal
-                    if (true)  //vamos a comparar si llego al radio menor
-                    {
-                        agent.SetDestination(target.tr.position);
-                    }
+                    agent.SetDestination(target.tr.position);
 
                 }
                 Chasing = true;
@@ -57,10 +53,6 @@ public class Archer : Soldier
             }
             if (nearby.Length == 0)
             {
-                if (agent)
-                {
-                    agent.ResetPath();
-                }
                 //cambiar por nexo
                 target = nexoTarget;
                 Chasing = false;
@@ -78,7 +70,7 @@ public class Archer : Soldier
             if (agent && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-                target.SendMessage("takeDamage", new Vector4(0, 0, 0, 3));
+                target.SendMessage("takeDamage", new Vector4(0, 0, 0, 1));
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();
@@ -98,6 +90,12 @@ public class Archer : Soldier
                 Invoke(nameof(restartAgent), 0);
 
             }
+        }
+        if (!target && agent)
+        {
+            agent.ResetPath();
+            target = nexoTarget;
+            Chasing = false;
         }
     }
 

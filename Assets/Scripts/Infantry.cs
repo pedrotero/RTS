@@ -45,10 +45,6 @@ public class Infantry : Soldier
             }
             if (nearby.Length==0)
             {
-                if (agent && agent.isOnNavMesh)
-                {
-                    agent.ResetPath();
-                }
                 //cambiar por nexo
                 target = nexoTarget;
                 Chasing = false;
@@ -80,6 +76,12 @@ public class Infantry : Soldier
                 rig.velocity = vkb;
                 Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
             }
+        }
+        if (!target && agent)
+        {
+            agent.ResetPath();
+            target = nexoTarget;
+            Chasing = false;
         }
 
 
