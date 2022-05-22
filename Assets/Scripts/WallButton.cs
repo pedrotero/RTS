@@ -61,7 +61,7 @@ public class WallButton : MonoBehaviour
             else if (draggingwall)
             {
                 draggingwall = false;
-                if (prep.canAfford((int)(startPos-endPos).magnitude*5))
+                if (prep.canAfford((int)(startPos-endPos).magnitude*3 + 20))
                 {
                     dragged.GetComponent<Collider>().enabled = true;
                 }

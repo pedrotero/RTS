@@ -67,7 +67,7 @@ public class Archer : Soldier
         {
             Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
             float dist2Att = (attackPoint - tr.position).magnitude;
-            if (agent && dist2Att <= attackRadius && Time.time >= NextAttack)
+            if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
                 target.SendMessage("takeDamage", new Vector4(0, 0, 0, 1));
@@ -81,7 +81,7 @@ public class Archer : Soldier
                 Invoke(nameof(restartAgent), 0);
                 Invoke(nameof(EraseLaser), 0.2f);
             }
-            else if(agent && dist2Att <= attackRadius)
+            else if(agent && target && dist2Att <= attackRadius)
             {
                 agent.ResetPath();
                 target = null;

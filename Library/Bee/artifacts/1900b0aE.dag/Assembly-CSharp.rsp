@@ -329,6 +329,7 @@
 "Assets/Scripts/PrepManager.cs"
 "Assets/Scripts/Soldier.cs"
 "Assets/Scripts/SoldierSpawnButton.cs"
+"Assets/Scripts/Tank.cs"
 "Assets/Scripts/Unit.cs"
 "Assets/Scripts/Wall.cs"
 "Assets/Scripts/WallButton.cs"

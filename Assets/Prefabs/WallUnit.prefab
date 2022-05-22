@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6208631452542070090}
   - component: {fileID: 8807996807346246484}
   - component: {fileID: 8898557594917235466}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,6 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364c0036b41da7f4794d243b9bef671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 0
+  MaxHealth: 0
+  cv: {fileID: 0}
+  hb: {fileID: 0}
+  team: 0
+  tr: {fileID: 0}
 --- !u!208 &8898557594917235466
 NavMeshObstacle:
   m_ObjectHideFlags: 0
