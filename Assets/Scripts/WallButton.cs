@@ -45,10 +45,11 @@ public class WallButton : MonoBehaviour
             endPos = new Vector3(mauspos.x, 0, mauspos.z);
             dragged.transform.position = Vector3.Lerp(startPos, endPos, 0.5f);
             Vector3 dir = endPos - startPos;
-            float angle = Vector3.SignedAngle(Vector3.right, dir,Vector3.right);
+            float angle = Vector3.SignedAngle(Vector3.right, dir,Vector3.up);
             float size = Mathf.Abs((endPos - startPos).magnitude);
             dragged.transform.localScale = new Vector3(size, 5, 2);
             dragged.transform.rotation = Quaternion.Euler(new Vector3(0,angle,0));
+            dragged.hb.transform.rotation = Quaternion.SlerpUnclamped(dragged.transform.rotation, dragged.hb.startRotation, -1);
             Debug.Log("angle"+angle);
 
         }
@@ -90,7 +91,8 @@ public class WallButton : MonoBehaviour
             int x = team ? 100 : -100;
 
             dragged = Instantiate(WallPrefab, new Vector3(x, 0, 0), Quaternion.identity);
-            //prep.soldiers.Add(dragged);
+            dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
+        //prep.soldiers.Add(dragged);
 
 
     }

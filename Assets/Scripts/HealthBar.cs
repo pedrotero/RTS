@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    Quaternion startRotation;
+    public Quaternion startRotation;
     public Image health;
     void Start()
     {

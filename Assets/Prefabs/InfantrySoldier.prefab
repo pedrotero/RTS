@@ -364,20 +364,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e3daf71213d954da9409ac9a2221ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
   Health: 0
   MaxHealth: 0
   cv: {fileID: 715262645055805085}
   hb: {fileID: 610967211082201718}
   team: 0
+  tr: {fileID: 9154782630524745672}
+  agent: {fileID: 0}
   rig: {fileID: 0}
   target: {fileID: 0}
-  tr: {fileID: 9154782630524745672}
   nearby: []
   Chasing: 0
   NextAttack: 0
   FireRate: 0
   attackRadius: 0
+  nexoTarget: {fileID: 0}
 --- !u!54 &9154782630524745679
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -473,11 +474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3316094968815977189, guid: 67b30da19d27b60438238d98b387c653, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3316094968815977189, guid: 67b30da19d27b60438238d98b387c653, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3316094968815977189, guid: 67b30da19d27b60438238d98b387c653, type: 3}
       propertyPath: m_LocalRotation.y
@@ -497,7 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3316094968815977189, guid: 67b30da19d27b60438238d98b387c653, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3316094968815977189, guid: 67b30da19d27b60438238d98b387c653, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
