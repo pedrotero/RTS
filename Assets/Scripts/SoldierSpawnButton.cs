@@ -36,9 +36,12 @@ public class SoldierSpawnButton : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
-
-                dragged.GetComponent<Collider>().enabled = true;
-                dragging = false;
+                if (Mathf.Abs(dragged.transform.position.x) <=80 && Mathf.Abs(dragged.transform.position.z) <= 45)
+                {
+                    dragged.GetComponent<Collider>().enabled = true;
+                    dragging = false;
+                }
+                
             }
         }
 
@@ -55,8 +58,9 @@ public class SoldierSpawnButton : MonoBehaviour
             Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition+Vector3.forward*90);
             dragging = true;
             int x = team ? 100 : -100;
-
+            
             dragged = Instantiate(SoldierPrefab, new Vector3(x, 0, 0), Quaternion.identity);
+            dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
             prep.soldiers.Add(dragged);
         }
 

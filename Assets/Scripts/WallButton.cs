@@ -49,6 +49,8 @@ public class WallButton : MonoBehaviour
             float size = Mathf.Abs((endPos - startPos).magnitude);
             dragged.transform.localScale = new Vector3(size, 5, 2);
             dragged.transform.rotation = Quaternion.Euler(new Vector3(0,angle,0));
+            Debug.Log("angle"+angle);
+
         }
 
         if (Input.GetMouseButtonDown(0))

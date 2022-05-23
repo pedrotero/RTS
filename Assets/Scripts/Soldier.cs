@@ -61,6 +61,6 @@ public class Soldier : Unit
         nexoTarget = n;
         team = t;
         agent = gameObject.AddComponent<NavMeshAgent>();
-        gameObject.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
+        
     }
 }

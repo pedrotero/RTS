@@ -39,8 +39,12 @@ public class NexoButton : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
 
-                dragged.GetComponent<Collider>().enabled = true;
-                dragging = false;
+                if (Mathf.Abs(dragged.transform.position.x) <= 80 && Mathf.Abs(dragged.transform.position.z) <= 45)
+                {
+                    
+                    dragged.GetComponent<Collider>().enabled = true;
+                    dragging = false;
+                }
             }
         }
 
@@ -57,11 +61,13 @@ public class NexoButton : MonoBehaviour
             Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
             dragging = true;
             int x = team ? 100 : -100;
-
+            
             dragged = Instantiate(NexoPrefab, new Vector3(x, 4, 0), Quaternion.identity);
+            dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
             HayNexo = true;
             GetComponent<Button>().enabled = false;
             prep.nexo = dragged;
+            
             prep.HayNexo = true;
             //prep.soldiers.Add(dragged);
         }

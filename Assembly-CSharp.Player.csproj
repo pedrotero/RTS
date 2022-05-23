@@ -65,10 +65,10 @@
     <Compile Include="Assets\Scripts\WallButton.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\NexoButton.cs" />
+    <Compile Include="Assets\Scripts\Tank.cs" />
     <Compile Include="Assets\Scripts\Archer.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Nexo.cs" />
-    <Compile Include="Assets\Scripts\Tank.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

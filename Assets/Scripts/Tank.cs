@@ -10,8 +10,8 @@ public class Tank : Soldier
     void Start()
     {
         NextAttack = 0;
-        FireRate = 2;
-        attackRadius = 5;
+        FireRate = 3;
+        attackRadius = 4;
         GetComponent<Collider>().enabled = false;
         MaxHealth = 200;
         Health = MaxHealth;
@@ -36,6 +36,8 @@ public class Tank : Soldier
                 float dis = Vector3.Distance(hit.transform.position, tr.position);
                 if (dis <= closest)
                 {
+                    Debug.Log("Hello World");
+
                     closest = dis;
                     target = hit.GetComponent<Soldier>();
                     agent.SetDestination(target.tr.position);

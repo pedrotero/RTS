@@ -10,7 +10,7 @@ public class Infantry : Soldier
     void Start()
     {
         NextAttack = 0;
-        FireRate = 2;
+        FireRate = 1;
         attackRadius = 4;
         GetComponent<Collider>().enabled = false;
         MaxHealth = 100;
