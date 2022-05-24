@@ -40,7 +40,7 @@ public class Archer : Soldier
             float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
-                float dis = Vector3.Distance(hit.transform.position, tr.position);
+                float dis = Vector3.Distance(hit.ClosestPoint(tr.position), tr.position);
                 if (dis <= closest)
                 {
                     closest = dis; //asigna al mas cercano 

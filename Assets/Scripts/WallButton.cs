@@ -49,8 +49,8 @@ public class WallButton : MonoBehaviour
             float size = Mathf.Abs((endPos - startPos).magnitude);
             dragged.transform.localScale = new Vector3(size, 5, 2);
             dragged.transform.rotation = Quaternion.Euler(new Vector3(0,angle,0));
-            dragged.hb.transform.rotation = Quaternion.SlerpUnclamped(dragged.transform.rotation, dragged.hb.startRotation, -1);
-            Debug.Log("angle"+angle);
+            dragged.hb.transform.rotation = Quaternion.Inverse(dragged.hb.transform.rotation) * dragged.transform.rotation;
+            dragged.cv.transform.localScale = new Vector3(0.1f/size,0.02f,0.1f); 
 
         }
 

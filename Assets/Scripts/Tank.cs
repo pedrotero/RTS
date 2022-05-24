@@ -32,14 +32,14 @@ public class Tank : Soldier
             float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
-
-                float dis = Vector3.Distance(hit.transform.position, tr.position);
+                Debug.Log("Hello World" + hit.name);
+                float dis = Vector3.Distance(hit.ClosestPoint(tr.position), tr.position);
                 if (dis <= closest)
                 {
-                    Debug.Log("Hello World");
+                    
 
                     closest = dis;
-                    target = hit.GetComponent<Soldier>();
+                    target = hit.GetComponent<Unit>();
                     agent.SetDestination(target.tr.position);
                 }
                 Chasing = true;

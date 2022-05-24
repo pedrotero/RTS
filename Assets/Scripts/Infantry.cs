@@ -33,7 +33,7 @@ public class Infantry : Soldier
             foreach (Collider hit in nearby)
             {
                 
-                float dis = Vector3.Distance(hit.transform.position, tr.position);
+                float dis = Vector3.Distance(hit.ClosestPoint(tr.position), tr.position);
                 if (dis <= closest)
                 {
                     closest = dis;
@@ -82,6 +82,13 @@ public class Infantry : Soldier
             agent.ResetPath();
             target = nexoTarget;
             Chasing = false;
+        }
+
+        if (target && agent && agent.pathStatus != NavMeshPathStatus.PathComplete)
+        {
+
+            Debug.Log("comenzó la guachafita");
+
         }
 
 
