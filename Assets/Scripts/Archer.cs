@@ -35,8 +35,8 @@ public class Archer : Soldier
         if (!Chasing && agent)
         {
             float radius = 40;
-            nearby = Physics.OverlapSphere(tr.position, radius, 8);
-            nearby = nearby.Where(h => h.GetComponent<Soldier>().team != team).ToArray();
+            nearby = Physics.OverlapSphere(tr.position, radius, 136);
+            nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
@@ -44,7 +44,7 @@ public class Archer : Soldier
                 if (dis <= closest)
                 {
                     closest = dis; //asigna al mas cercano 
-                    target = hit.GetComponent<Soldier>(); //posicion del objetivo como tal
+                    target = hit.GetComponent<Unit>(); //posicion del objetivo como tal
                     agent.SetDestination(target.tr.position);
 
                 }

@@ -27,8 +27,8 @@ public class Tank : Soldier
         if (!Chasing && agent)
         {
             float radius = 20;
-            nearby = Physics.OverlapSphere(tr.position, radius, 8);
-            nearby = nearby.Where(h => h.GetComponent<Soldier>().team != team).ToArray();
+            nearby = Physics.OverlapSphere(tr.position, radius, 136);
+            nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
             foreach (Collider hit in nearby)
             {

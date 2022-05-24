@@ -86,12 +86,13 @@ public class WallButton : MonoBehaviour
 
     public void CreateWall()
     {
-            mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
-            dragging = true;
-            int x = team ? 100 : -100;
+        mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
+        dragging = true;
+        int x = team ? 100 : -100;
 
-            dragged = Instantiate(WallPrefab, new Vector3(x, 0, 0), Quaternion.identity);
-            dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
+        dragged = Instantiate(WallPrefab, new Vector3(x, 0, 0), Quaternion.identity);
+        dragged.team = team;
+        dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
         //prep.soldiers.Add(dragged);
 
 
