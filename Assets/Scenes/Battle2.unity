@@ -2098,8 +2098,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
-  SoldierPrefab: {fileID: 7380057457388999264, guid: dff5e91cbbffb3049af6bc58696b6493, type: 3}
-  price: 30
+  SoldierPrefab: {fileID: 7230720092173120694, guid: 4b805a49ace6672499e2293c8f070a51, type: 3}
+  price: 450
   prep: {fileID: 563759524}
 --- !u!114 &910390642
 MonoBehaviour:
@@ -2144,7 +2144,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 910390643}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 910390641}
+        m_TargetAssemblyTypeName: SoldierSpawnButton, Assembly-CSharp
+        m_MethodName: DragSoldier
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &910390643
 MonoBehaviour:
   m_ObjectHideFlags: 0
