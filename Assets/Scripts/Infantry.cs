@@ -18,6 +18,7 @@ public class Infantry : Soldier
         cv.worldCamera = Camera.main;
         tr = GetComponent<Transform>();
         rig = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
         Chasing = false;
     }
 
@@ -38,7 +39,6 @@ public class Infantry : Soldier
                 {
                     closest = dis;
                     target = hit.GetComponent<Soldier>();
-                    agent.SetDestination(target.tr.position);
                 }
                 Chasing = true;
                 
@@ -53,7 +53,7 @@ public class Infantry : Soldier
         }
         if (target && agent && agent.isOnNavMesh)
         {
-            agent.SetDestination(target.tr.position);
+            agent.SetDestination(target.GetComponent<Collider>().ClosestPoint(tr.position));
         }
 
         if (target && agent)
@@ -64,7 +64,6 @@ public class Infantry : Soldier
             {
                 //attack
                 Vector3 dir = (tr.position - target.tr.position).normalized * 5;
-
                 target.SendMessage("takeDamage", new Vector4(dir.x, dir.y, dir.z, 10));
 
                 NextAttack = Time.time + FireRate;

@@ -50,7 +50,7 @@ public class WallButton : MonoBehaviour
             dragged.transform.localScale = new Vector3(size, 5, 2);
             dragged.transform.rotation = Quaternion.Euler(new Vector3(0,angle,0));
             dragged.hb.transform.rotation = Quaternion.Inverse(dragged.hb.transform.rotation) * dragged.transform.rotation;
-            dragged.cv.transform.localScale = new Vector3(0.1f/size,0.02f,0.1f); 
+            dragged.cv.transform.localScale = new Vector3(0.1f/(size+0.0001f),0.02f,0.1f); 
 
         }
 
@@ -92,8 +92,11 @@ public class WallButton : MonoBehaviour
 
         dragged = Instantiate(WallPrefab, new Vector3(x, 0, 0), Quaternion.identity);
         dragged.team = team;
+        int affteam = team ? 0 : 1;
+        
         dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
-        //prep.soldiers.Add(dragged);
+        prep.walls.Add(dragged);
+        dragged.mod.AffectsAgentType(affteam);
 
 
     }

@@ -23,6 +23,7 @@ public class Archer : Soldier
         tr = GetComponent<Transform>();
         rig = GetComponent<Rigidbody>();
         lr = GetComponent<LineRenderer>();
+        col = GetComponent<Collider>();
         Chasing = false;
         
 
@@ -35,7 +36,7 @@ public class Archer : Soldier
         if (!Chasing && agent)
         {
             float radius = 40;
-            nearby = Physics.OverlapSphere(tr.position, radius, 136);
+            nearby = Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
             foreach (Collider hit in nearby)
@@ -45,7 +46,6 @@ public class Archer : Soldier
                 {
                     closest = dis; //asigna al mas cercano 
                     target = hit.GetComponent<Unit>(); //posicion del objetivo como tal
-                    agent.SetDestination(target.tr.position);
 
                 }
                 Chasing = true;
@@ -57,15 +57,44 @@ public class Archer : Soldier
                 target = nexoTarget;
                 Chasing = false;
             }
-
+            agent.SetDestination(target.col.ClosestPoint(tr.position));
         }
+
+        if (target && agent && agent.pathStatus == NavMeshPathStatus.PathPartial)
+        {
+            float radius = 40;
+            nearby = Physics.OverlapSphere(tr.position, radius, 8);
+            nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
+            float closest = radius + 1;
+            foreach (Collider hit in nearby)
+            {
+                float dis = Vector3.Distance(hit.ClosestPoint(tr.position), tr.position);
+                if (dis <= closest)
+                {
+                    closest = dis; //asigna al mas cercano 
+                    target = hit.GetComponent<Unit>(); //posicion del objetivo como tal
+
+                }
+                Chasing = true;
+
+            }
+            if (nearby.Length == 0)
+            {
+                //cambiar por nexo
+                target = nexoTarget;
+                Chasing = false;
+            }
+        }
+
+
+
         if (target && agent && agent.isOnNavMesh)
         {
-            agent.SetDestination(target.tr.position);
+            agent.SetDestination(target.col.ClosestPoint(tr.position));
         }
         if (target && agent)
         {
-            Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
+            Vector3 attackPoint = target.col.ClosestPointOnBounds(tr.position);
             float dist2Att = (attackPoint - tr.position).magnitude;
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
@@ -97,6 +126,8 @@ public class Archer : Soldier
             target = nexoTarget;
             Chasing = false;
         }
+
+        
     }
 
 

@@ -11,6 +11,7 @@ public class Nexo : Unit
         Health = MaxHealth;
         cv.worldCamera = Camera.main;
         tr = GetComponent<Transform>();
+        col = GetComponent<Collider>();
     }
 
     // Update is called once per frame

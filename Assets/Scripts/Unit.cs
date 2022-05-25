@@ -10,6 +10,7 @@ public class Unit : MonoBehaviour
     public HealthBar hb;
     public bool team;
     public Transform tr;
+    public Collider col;
     // Start is called before the first frame update
     void Start()
     {

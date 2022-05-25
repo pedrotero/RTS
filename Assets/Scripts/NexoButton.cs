@@ -63,6 +63,7 @@ public class NexoButton : MonoBehaviour
             int x = team ? 100 : -100;
             
             dragged = Instantiate(NexoPrefab, new Vector3(x, 4, 0), Quaternion.identity);
+            dragged.team = team;
             dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
             HayNexo = true;
             GetComponent<Button>().enabled = false;

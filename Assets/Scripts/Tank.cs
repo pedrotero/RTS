@@ -18,6 +18,7 @@ public class Tank : Soldier
         cv.worldCamera = Camera.main;
         tr = GetComponent<Transform>();
         rig = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
         Chasing = false;
     }
 
@@ -32,7 +33,6 @@ public class Tank : Soldier
             float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
-                Debug.Log("Hello World" + hit.name);
                 float dis = Vector3.Distance(hit.ClosestPoint(tr.position), tr.position);
                 if (dis <= closest)
                 {
@@ -40,7 +40,6 @@ public class Tank : Soldier
 
                     closest = dis;
                     target = hit.GetComponent<Unit>();
-                    agent.SetDestination(target.tr.position);
                 }
                 Chasing = true;
 
@@ -55,12 +54,12 @@ public class Tank : Soldier
         }
         if (target && agent && agent.isOnNavMesh)
         {
-            agent.SetDestination(target.tr.position);
+            agent.SetDestination(target.col.ClosestPoint(tr.position));
         }
 
         if (target && agent)
         {
-            Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
+            Vector3 attackPoint = target.col.ClosestPointOnBounds(tr.position);
             float dist2Att = (attackPoint - tr.position).magnitude;
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
