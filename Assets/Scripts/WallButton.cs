@@ -92,11 +92,6 @@ public class WallButton : MonoBehaviour
 
         dragged = Instantiate(WallPrefab, new Vector3(x, 0, 0), Quaternion.identity);
         dragged.team = team;
-        int affteam = team ? 0 : 1;
-        
-        dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
-        prep.walls.Add(dragged);
-        dragged.mod.AffectsAgentType(affteam);
 
 
     }
