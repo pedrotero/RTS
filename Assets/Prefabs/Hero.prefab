@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1368839714266063597}
   - component: {fileID: 8199857805822650981}
   - component: {fileID: 2779687621873164511}
+  - component: {fileID: -774361350546756248}
   - component: {fileID: 311514200900365486}
   - component: {fileID: 7740943498943301496}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,6 +89,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-774361350546756248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912222956018964622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0df69035bf1fd45abedaaa74cee73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  MaxHealth: 0
+  cv: {fileID: 5130690359813806208}
+  hb: {fileID: 6425167339826021251}
+  team: 0
+  tr: {fileID: 1368839714266063597}
+  col: {fileID: 0}
+  agent: {fileID: 0}
+  rig: {fileID: 0}
+  target: {fileID: 0}
+  nearby: []
+  Chasing: 0
+  NextAttack: 0
+  FireRate: 0
+  attackRadius: 0
+  nexoTarget: {fileID: 0}
+  canReach: 0
 --- !u!65 &311514200900365486
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -128,7 +158,7 @@ GameObject:
   - component: {fileID: 3310126646188843182}
   - component: {fileID: 4893127532006049766}
   - component: {fileID: 1418567609828519986}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +240,7 @@ GameObject:
   - component: {fileID: 4009681546996745880}
   - component: {fileID: 1794504393197965614}
   - component: {fileID: 8451375817783280496}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5016,7 +5046,7 @@ GameObject:
   - component: {fileID: 2493975591253016178}
   - component: {fileID: 4699392844663847834}
   - component: {fileID: 1144515857113681531}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5202,6 +5232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBarCont
       objectReference: {fileID: 0}
+    - target: {fileID: 3316094968815977186, guid: 67b30da19d27b60438238d98b387c653, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3316094968815977189, guid: 67b30da19d27b60438238d98b387c653, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5286,6 +5320,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3316094969252865282, guid: 67b30da19d27b60438238d98b387c653, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67b30da19d27b60438238d98b387c653, type: 3}
 --- !u!224 &6498894384466963247 stripped
@@ -5293,6 +5331,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3316094968815977189, guid: 67b30da19d27b60438238d98b387c653, type: 3}
   m_PrefabInstance: {fileID: 8373762688531278282}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6425167339826021251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3251409178292791881, guid: 67b30da19d27b60438238d98b387c653, type: 3}
+  m_PrefabInstance: {fileID: 8373762688531278282}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c31fac61a8454249bab23801e96929a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6498894384293301454 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3316094969252865284, guid: 67b30da19d27b60438238d98b387c653, type: 3}

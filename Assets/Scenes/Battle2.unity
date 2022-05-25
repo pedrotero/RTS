@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43846762, g: 0.48655343, b: 0.56682694, a: 1}
+  m_IndirectSpecularColor: {r: 0.43846732, g: 0.48655313, b: 0.56682646, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2098,8 +2098,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
-  SoldierPrefab: {fileID: 7380057457388999264, guid: dff5e91cbbffb3049af6bc58696b6493, type: 3}
-  price: 30
+  SoldierPrefab: {fileID: -774361350546756248, guid: 4b805a49ace6672499e2293c8f070a51, type: 3}
+  price: 250
   prep: {fileID: 563759524}
 --- !u!114 &910390642
 MonoBehaviour:
@@ -2144,7 +2144,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 910390643}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 910390641}
+        m_TargetAssemblyTypeName: SoldierSpawnButton, Assembly-CSharp
+        m_MethodName: DragSoldier
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &910390643
 MonoBehaviour:
   m_ObjectHideFlags: 0
