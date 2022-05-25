@@ -27,30 +27,57 @@ public class Infantry : Soldier
     {
         if (!Chasing && agent)
         {
-            float radius = 20;
-            nearby= Physics.OverlapSphere(tr.position, radius, 136);
+            float radius = 40;
+            nearby = Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
             foreach (Collider hit in nearby)
             {
-                
                 float dis = Vector3.Distance(hit.ClosestPoint(tr.position), tr.position);
                 if (dis <= closest)
                 {
-                    closest = dis;
-                    target = hit.GetComponent<Soldier>();
+                    closest = dis; //asigna al mas cercano 
+                    target = hit.GetComponent<Unit>(); //posicion del objetivo como tal
+
                 }
                 Chasing = true;
-                
+
             }
-            if (nearby.Length==0)
+            if (nearby.Length == 0)
             {
                 //cambiar por nexo
                 target = nexoTarget;
                 Chasing = false;
             }
-
+            agent.SetDestination(target.col.ClosestPoint(tr.position));
         }
+
+        if (target && agent && agent.pathStatus != NavMeshPathStatus.PathComplete)
+        {
+            float radius = 40;
+            nearby = Physics.OverlapSphere(tr.position, radius, 136);
+            nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
+            float closest = radius + 1;
+            foreach (Collider hit in nearby)
+            {
+                float dis = Vector3.Distance(hit.ClosestPoint(tr.position), tr.position);
+                if (dis <= closest)
+                {
+                    closest = dis; //asigna al mas cercano 
+                    target = hit.GetComponent<Unit>(); //posicion del objetivo como tal
+
+                }
+                Chasing = true;
+
+            }
+            if (nearby.Length == 0)
+            {
+                //cambiar por nexo
+                target = nexoTarget;
+                Chasing = false;
+            }
+        }
+
         if (target && agent && agent.isOnNavMesh)
         {
             agent.SetDestination(target.GetComponent<Collider>().ClosestPoint(tr.position));

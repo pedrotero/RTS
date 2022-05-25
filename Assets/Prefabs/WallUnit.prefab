@@ -117,6 +117,7 @@ MonoBehaviour:
   hb: {fileID: 3015027985860218168}
   team: 0
   tr: {fileID: 6300213972342622280}
+  col: {fileID: 6208631452542070090}
 --- !u!208 &8898557594917235466
 NavMeshObstacle:
   m_ObjectHideFlags: 0

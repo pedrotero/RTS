@@ -60,10 +60,10 @@ public class Archer : Soldier
             agent.SetDestination(target.col.ClosestPoint(tr.position));
         }
 
-        if (target && agent && agent.pathStatus == NavMeshPathStatus.PathPartial)
+        if (target && agent && agent.pathStatus != NavMeshPathStatus.PathComplete)
         {
             float radius = 40;
-            nearby = Physics.OverlapSphere(tr.position, radius, 8);
+            nearby = Physics.OverlapSphere(tr.position, radius, 136);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
             foreach (Collider hit in nearby)

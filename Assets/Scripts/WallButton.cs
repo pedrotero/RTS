@@ -73,7 +73,6 @@ public class WallButton : MonoBehaviour
                     Destroy(dragged.gameObject);
                     dragged = null;
                 }
-                Debug.Log("Hello World "+dragged);
 
             }
         }
@@ -92,6 +91,7 @@ public class WallButton : MonoBehaviour
 
         dragged = Instantiate(WallPrefab, new Vector3(x, 0, 0), Quaternion.identity);
         dragged.team = team;
+        dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
 
 
     }
