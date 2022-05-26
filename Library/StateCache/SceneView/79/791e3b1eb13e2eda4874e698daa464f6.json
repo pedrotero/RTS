@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"m_AlwaysRefresh":false,"showFog":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":false,"pivot":{"x":-97.0363998413086,"y":-50.19757080078125,"z":95.92682647705078},"rotation":{"x":-0.29849663376808169,"y":0.03348827362060547,"z":-0.010480698198080063,"w":-0.9537658095359802},"size":115.85639190673828,"orthographic":false}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"m_AlwaysRefresh":false,"showFog":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":false,"pivot":{"x":-30.933349609375,"y":-55.07953643798828,"z":102.68492889404297},"rotation":{"x":-0.2972036302089691,"y":-0.016615355387330056,"z":0.005172703880816698,"w":-0.9546559453010559},"size":132.3722381591797,"orthographic":false}
+>>>>>>> turret
