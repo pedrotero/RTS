@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PrepManager : MonoBehaviour
 {
     public List<Soldier> soldiers;
+    public List<Turret> turrets;
     public int Budget;
     public Text budt;
     public bool team;
@@ -65,6 +66,10 @@ public class PrepManager : MonoBehaviour
             {
                 sol.activateAgent(team, otherPrep.nexo);
 
+            }
+            foreach (Turret tur in turrets)
+            {
+                tur.canShoot = true;
             }
         }
         

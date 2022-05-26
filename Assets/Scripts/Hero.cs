@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Hero : Soldier
 {
+    public int charges = 2;
+    public KeyCode skill;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,10 @@ public class Hero : Soldier
 
         if (target && agent)
         {
+            if (charges>0)
+            {
+
+            }
             Vector3 attackPoint = target.GetComponent<Collider>().ClosestPointOnBounds(tr.position);
             float dist2Att = (attackPoint - tr.position).magnitude;
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)

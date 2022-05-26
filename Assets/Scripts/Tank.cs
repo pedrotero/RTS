@@ -92,7 +92,7 @@ public class Tank : Soldier
                 //attack
                 Vector3 dir = (tr.position - target.tr.position).normalized * 5;
 
-                target.SendMessage("takeDamage", new Vector4(dir.x, dir.y, dir.z, 25));
+                target.takeDamage(25);
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();

@@ -18,10 +18,10 @@ public class Soldier : Unit
     public bool canReach;
     // Start is called before the first frame update
 
-    public void takeDamage(Vector4 kbdmg)
+    public new void takeDamage(float dmg)
     {
 
-        Health -= kbdmg.w;
+        Health -= dmg;
         hb.UpdateDMG(Health / MaxHealth);
         if (Health <= 0)
         {
@@ -31,12 +31,9 @@ public class Soldier : Unit
         //si es un edif borrar esta parte
         if (agent)
         {
-            agent.isStopped = true;
-            Vector3 vkb = -kbdmg; //en direccion contraria 
-            rig.velocity = vkb;
-            Invoke(nameof(restartAgent), vkb.magnitude * 0.2f);
+            Invoke(nameof(restartAgent), 0.2f);
         }
-        
+
 
 
     }

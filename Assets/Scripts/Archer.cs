@@ -99,7 +99,7 @@ public class Archer : Soldier
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-                target.SendMessage("takeDamage", new Vector4(0, 0, 0, 1));
+                target.takeDamage(1);
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();

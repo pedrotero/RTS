@@ -80,7 +80,7 @@ public class Infantry : Soldier
 
         if (target && agent && agent.isOnNavMesh)
         {
-            agent.SetDestination(target.GetComponent<Collider>().ClosestPoint(tr.position));
+            agent.SetDestination(target.col.ClosestPoint(tr.position));
         }
 
         if (target && agent)
@@ -91,7 +91,7 @@ public class Infantry : Soldier
             {
                 //attack
                 Vector3 dir = (tr.position - target.tr.position).normalized * 5;
-                target.SendMessage("takeDamage", new Vector4(dir.x, dir.y, dir.z, 10));
+                target.takeDamage(10);
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();

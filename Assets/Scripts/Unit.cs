@@ -22,4 +22,19 @@ public class Unit : MonoBehaviour
     {
         
     }
+
+    public void takeDamage(float dmg)
+    {
+
+        Health -= dmg;
+        hb.UpdateDMG(Health / MaxHealth);
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+
+
+    }
 }

@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class TurretButton : MonoBehaviour
 {
     bool dragging = false;
-    Nexo dragged;
+    Turret dragged;
     public bool team;
-    public Nexo NexoPrefab;
-    public int price = 0;
+    public Turret TurretPrefab;
+    public int price = 100;
     public PrepManager prep;
-    public bool HayNexo;
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -56,15 +56,15 @@ public class TurretButton : MonoBehaviour
 
     public void DragSoldier()
     {
-        if (!HayNexo)
+        if (prep.canAfford(price))
         {
             Vector3 mauspos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 90);
             dragging = true;
             int x = team ? 100 : -100;
 
-            dragged = Instantiate(NexoPrefab, new Vector3(x, 7, 0), Quaternion.identity);
-            dragged.team = team;
+            dragged = Instantiate(TurretPrefab, new Vector3(x, 0, 0), Quaternion.identity);
             dragged.GetComponent<Renderer>().material.color = team ? Color.blue : Color.red;
+            prep.turrets.Add(dragged);
         }
 
 
