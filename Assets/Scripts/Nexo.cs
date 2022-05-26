@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Nexo : Unit
 {
@@ -17,7 +18,6 @@ public class Nexo : Unit
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void takeDamage(Vector4 kbdmg)
@@ -28,7 +28,14 @@ public class Nexo : Unit
         hb.UpdateDMG(Health / MaxHealth);
         if (Health <= 0)
         {
-            Destroy(gameObject);
+            if (team)
+            {
+                SceneManager.LoadScene("EndScreen");
+            }
+            else
+            {
+                SceneManager.LoadScene("EndScreen");
+            }
             return;
         }
 

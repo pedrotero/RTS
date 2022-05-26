@@ -9,11 +9,13 @@ public class Tank : Soldier
     // Start is called before the first frame update
     void Start()
     {
+        agtSpeed = 2;
+        AtkDmg = 10;
         NextAttack = 0;
-        FireRate = 3;
+        FireRate = 2.5f;
         attackRadius = 4;
         GetComponent<Collider>().enabled = false;
-        MaxHealth = 200;
+        MaxHealth = 400;
         Health = MaxHealth;
         cv.worldCamera = Camera.main;
         tr = GetComponent<Transform>();
@@ -27,7 +29,7 @@ public class Tank : Soldier
     {
         if (!Chasing && agent)
         {
-            float radius = 40;
+            float radius = 20;
             nearby = Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
@@ -54,7 +56,7 @@ public class Tank : Soldier
 
         if (target && agent && agent.pathStatus != NavMeshPathStatus.PathComplete)
         {
-            float radius = 40;
+            float radius = 20;
             nearby = Physics.OverlapSphere(tr.position, radius, 136);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
@@ -92,7 +94,7 @@ public class Tank : Soldier
                 //attack
                 Vector3 dir = (tr.position - target.tr.position).normalized * 5;
 
-                target.takeDamage(25);
+                target.takeDamage(AtkDmg);
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();

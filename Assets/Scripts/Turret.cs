@@ -10,9 +10,10 @@ public class Turret : Unit
     private Unit target;
     private float NextAttack;
     private float FireRate;
-
+    public int AtkDmg;
     void Start()
     {
+        AtkDmg = 3;
         NextAttack = 0;
         FireRate = 0.75f;
         MaxHealth = 300;
@@ -44,7 +45,7 @@ public class Turret : Unit
             }
             if (target)
             {
-                target.takeDamage(3);
+                target.takeDamage(AtkDmg);
                 NextAttack = Time.time + FireRate;
             }
             

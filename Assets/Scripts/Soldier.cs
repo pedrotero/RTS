@@ -16,6 +16,8 @@ public class Soldier : Unit
     public float attackRadius;
     public Nexo nexoTarget;
     public bool canReach;
+    public int AtkDmg;
+    public float agtSpeed;
     // Start is called before the first frame update
 
     public new void takeDamage(float dmg)

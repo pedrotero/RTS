@@ -13,11 +13,13 @@ public class Archer : Soldier
 
     void Start()
     {
+        agtSpeed = 3f;
+        AtkDmg = 3;
         NextAttack = 0;
         FireRate = 0.5f;
-        attackRadius = 20;
+        attackRadius = 40;
         GetComponent<Collider>().enabled = false;
-        MaxHealth = 25;
+        MaxHealth = 50;
         Health = MaxHealth;
         cv.worldCamera = Camera.main;
         tr = GetComponent<Transform>();
@@ -35,7 +37,7 @@ public class Archer : Soldier
     {
         if (!Chasing && agent)
         {
-            float radius = 40;
+            float radius = 60;
             nearby = Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
@@ -62,7 +64,7 @@ public class Archer : Soldier
 
         if (target && agent && agent.pathStatus != NavMeshPathStatus.PathComplete)
         {
-            float radius = 40;
+            float radius = 60;
             nearby = Physics.OverlapSphere(tr.position, radius, 136);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
@@ -99,7 +101,7 @@ public class Archer : Soldier
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
                 //attack
-                target.takeDamage(1);
+                target.takeDamage(AtkDmg);
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();

@@ -65,6 +65,7 @@ public class PrepManager : MonoBehaviour
             foreach (Soldier sol in soldiers)
             {
                 sol.activateAgent(team, otherPrep.nexo);
+                sol.agent.speed = sol.agtSpeed;
 
             }
             foreach (Turret tur in turrets)

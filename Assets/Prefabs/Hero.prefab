@@ -118,6 +118,13 @@ MonoBehaviour:
   attackRadius: 0
   nexoTarget: {fileID: 0}
   canReach: 0
+  AtkDmg: 0
+  agtSpeed: 0
+  charges: 2
+  sk0: 120
+  sk1: 110
+  ps: {fileID: 1794504393197965614}
+  skillDur: 0
 --- !u!65 &311514200900365486
 BoxCollider:
   m_ObjectHideFlags: 0

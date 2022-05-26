@@ -9,6 +9,8 @@ public class Infantry : Soldier
     // Start is called before the first frame update
     void Start()
     {
+        agtSpeed = 4;
+        AtkDmg = 5;
         NextAttack = 0;
         FireRate = 1;
         attackRadius = 4;
@@ -27,7 +29,7 @@ public class Infantry : Soldier
     {
         if (!Chasing && agent)
         {
-            float radius = 40;
+            float radius = 30;
             nearby = Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
@@ -54,7 +56,7 @@ public class Infantry : Soldier
 
         if (target && agent && agent.pathStatus != NavMeshPathStatus.PathComplete)
         {
-            float radius = 40;
+            float radius = 30;
             nearby = Physics.OverlapSphere(tr.position, radius, 136);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
@@ -91,7 +93,7 @@ public class Infantry : Soldier
             {
                 //attack
                 Vector3 dir = (tr.position - target.tr.position).normalized * 5;
-                target.takeDamage(10);
+                target.takeDamage(AtkDmg);
 
                 NextAttack = Time.time + FireRate;
                 agent.ResetPath();

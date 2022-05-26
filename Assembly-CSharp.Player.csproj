@@ -72,6 +72,8 @@
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Nexo.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
+    <Compile Include="Assets\Scripts\End.cs" />
+    <Compile Include="Assets\Scripts\StartButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
