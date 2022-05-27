@@ -7,7 +7,8 @@ using UnityEngine.AI;
 public class Hero : Soldier
 {
     public int charges = 2;
-    KeyCode skill;
+    public KeyCode skill;
+    public bool skSet=true;
     public KeyCode sk0;
     public KeyCode sk1;
     public ParticleSystem ps;
@@ -17,9 +18,9 @@ public class Hero : Soldier
     void Start()
     {
         agtSpeed = 5;
-        AtkDmg = 15;
+        AtkDmg = 20;
         NextAttack = 0;
-        FireRate = 2f;
+        FireRate = 1.5f;
         attackRadius = 5;
         GetComponent<Collider>().enabled = false;
         MaxHealth = 650;
@@ -35,6 +36,11 @@ public class Hero : Soldier
     // Update is called once per frame
     void Update()
     {
+        if (agent && skSet)
+        {
+            skill = team ? sk1 : sk0;
+            skSet = false;
+        }
         if (!Chasing && agent)
         {
             float radius = 40;
@@ -96,13 +102,12 @@ public class Hero : Soldier
         {
             if (charges>0 && Input.GetKeyDown(skill) && Time.time >= skillDur)
             {
-                Debug.Log("Hello World");
 
                 ps.Play();
                 agent.speed = 10;
                 attackRadius = 10;
-                AtkDmg = 30;
-                FireRate = 1f;
+                AtkDmg = 40;
+                FireRate = 0.75f;
                 charges--;
                 skillDur = Time.time + 7.5f;
             }
@@ -111,8 +116,8 @@ public class Hero : Soldier
                 ps.Pause();
                 ps.Clear();
                 attackRadius = 5;
-                FireRate = 2.5f;
-                AtkDmg = 15;
+                FireRate = 1.5f;
+                AtkDmg = 20;
                 agent.speed = 5;
 
             }
@@ -121,7 +126,6 @@ public class Hero : Soldier
             float dist2Att = (attackPoint - tr.position).magnitude;
             if (agent && target && dist2Att <= attackRadius && Time.time >= NextAttack)
             {
-                Debug.Log("Hello World");
 
                 //attack
                 Vector3 dir = (tr.position - target.tr.position).normalized * 5;
@@ -143,14 +147,5 @@ public class Hero : Soldier
             target = nexoTarget;
             Chasing = false;
         }
-    }
-
-
-    public new void activateAgent(bool t, Nexo n)
-    {
-        nexoTarget = n;
-        team = t;
-        agent = gameObject.AddComponent<NavMeshAgent>();
-        skill = team ? sk1 : sk0;
     }
 }

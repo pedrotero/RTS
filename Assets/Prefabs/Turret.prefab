@@ -302,6 +302,11 @@ MonoBehaviour:
   team: 0
   tr: {fileID: 7306087465279041227}
   col: {fileID: 5771276094775405964}
+  canShoot: 0
+  nearby: []
+  AtkDmg: 0
+  lr: {fileID: 3682436294101132126}
+  Bhole: {fileID: 5257479342512827310}
 --- !u!120 &3682436294101132126
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -322,7 +327,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: cdab5ef5c3563744d8c1b2daca53ccb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

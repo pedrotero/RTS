@@ -12,7 +12,23 @@ public class End : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int win = PlayerPrefs.GetInt("Winner");
+        if (win == 0)
+        {
+            tWinner.text = "Player " + 1 + " Wins!";
+            tLoser.text = "Player " + 2 + " Lost :C";
+            tLoser.color = Color.blue;
+        }
+        else if (win == 1)
+        {
+            tWinner.text = "Player " + 2 + " Wins!";
+            tLoser.text = "Player " + 1 + " Lost :C!";
+            tLoser.color = Color.red;
+        }
+        
+        
         tLoser.GetComponent<Rigidbody>().velocity = new Vector3(60,90);
+
     }
 
     // Update is called once per frame

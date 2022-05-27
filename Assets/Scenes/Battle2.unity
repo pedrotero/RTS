@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 6200971b9a1b2fa4c917f85c7059edc3, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 54ceeeb97d10b454db446143278d89a6, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ddf24ac72c93da42b693eaae19def38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  team: 1
   SoldierPrefab: {fileID: 7230720092173120694, guid: 4b805a49ace6672499e2293c8f070a51, type: 3}
   price: 350
   prep: {fileID: 1187328746}
@@ -2042,17 +2042,17 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.740566, g: 0.8305468, b: 1, a: 1}
+  m_Color: {r: 0.8324136, g: 0.8513638, b: 0.8867924, a: 1}
   m_Intensity: 1
   m_Range: 116.86
   m_SpotAngle: 91.1
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.067
+    m_Strength: 0.26
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -2159,7 +2159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cd323a3f3d54347a35e25d2c687aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  team: 1
   TurretPrefab: {fileID: 1420114798625990792, guid: a8f6cee3c5494e440b05824e5d8ccb45, type: 3}
   price: 150
   prep: {fileID: 1187328746}

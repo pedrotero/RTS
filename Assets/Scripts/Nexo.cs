@@ -30,10 +30,12 @@ public class Nexo : Unit
         {
             if (team)
             {
+                PlayerPrefs.SetInt("Winner", 0);
                 SceneManager.LoadScene("EndScreen");
             }
             else
             {
+                PlayerPrefs.SetInt("Winner", 1);
                 SceneManager.LoadScene("EndScreen");
             }
             return;

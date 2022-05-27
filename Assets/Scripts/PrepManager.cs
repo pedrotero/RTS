@@ -71,6 +71,7 @@ public class PrepManager : MonoBehaviour
             foreach (Turret tur in turrets)
             {
                 tur.canShoot = true;
+                tur.team = team;
             }
         }
         

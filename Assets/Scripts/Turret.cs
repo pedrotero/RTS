@@ -11,9 +11,11 @@ public class Turret : Unit
     private float NextAttack;
     private float FireRate;
     public int AtkDmg;
+    public LineRenderer lr;
+    public Transform Bhole;
     void Start()
     {
-        AtkDmg = 3;
+        AtkDmg = 7;
         NextAttack = 0;
         FireRate = 0.75f;
         MaxHealth = 300;
@@ -28,7 +30,7 @@ public class Turret : Unit
     {
         if (canShoot && Time.time >= NextAttack)
         {
-            float radius = 35;
+            float radius = 60;
             nearby = Physics.OverlapSphere(tr.position, radius, 8);
             nearby = nearby.Where(h => h.GetComponent<Unit>().team != team).ToArray();
             float closest = radius + 1;
@@ -45,8 +47,12 @@ public class Turret : Unit
             }
             if (target)
             {
+                Debug.Log("niggaaa");
+
+                DrawLaser(target.tr.position);
                 target.takeDamage(AtkDmg);
                 NextAttack = Time.time + FireRate;
+                Invoke(nameof(EraseLaser), 0.2f);
             }
             
 
@@ -72,5 +78,24 @@ public class Turret : Unit
     public bool getTeam()
     {
         return team;
+    }
+
+    void DrawLaser(Vector3 obj)
+    {
+        lr.startColor = team ? Color.blue : Color.red;
+        lr.endColor = team ? Color.blue : Color.red;
+        lr.SetPosition(0, Bhole.position);
+        lr.SetPosition(1, obj);
+        lr.startWidth = 0.2f;
+        lr.endWidth = 0.2f;
+
+    }
+
+    void EraseLaser()
+    {
+        lr.SetPosition(0, Bhole.position);
+        lr.SetPosition(1, Bhole.position);
+        lr.startWidth = 0f;
+        lr.endWidth = 0f;
     }
 }
