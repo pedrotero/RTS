@@ -22,7 +22,7 @@ public class End : MonoBehaviour
         else if (win == 1)
         {
             tWinner.text = "Player " + 2 + " Wins!";
-            tLoser.text = "Player " + 1 + " Lost :C!";
+            tLoser.text = "Player " + 1 + " Lost :C";
             tLoser.color = Color.red;
         }
         

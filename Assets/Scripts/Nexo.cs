@@ -20,14 +20,15 @@ public class Nexo : Unit
     {
     }
 
-    public void takeDamage(Vector4 kbdmg)
+    public override void takeDamage(float dmg)
     {
 
 
-        Health -= kbdmg.w;
+        Health -= dmg;
         hb.UpdateDMG(Health / MaxHealth);
         if (Health <= 0)
         {
+
             if (team)
             {
                 PlayerPrefs.SetInt("Winner", 0);

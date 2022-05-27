@@ -820,9 +820,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Obamicron:
+  m_Text: 'OBAMICRON:
 
-    it''s morbin time'
+    It''s Morbin'' Time'
 --- !u!222 &1908043572
 CanvasRenderer:
   m_ObjectHideFlags: 0

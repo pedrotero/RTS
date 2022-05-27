@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
         
     }
 
-    public void takeDamage(float dmg)
+    public virtual void takeDamage(float dmg)
     {
 
         Health -= dmg;
